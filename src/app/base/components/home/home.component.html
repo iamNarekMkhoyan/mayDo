@@ -1,0 +1,18 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ "Title" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ng-container *ngFor="let note of notes">
+    <app-note-widget [routerLink]="['/notes', note.id]"></app-note-widget>
+  </ng-container>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createNewNote()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-button (click)="clearDB()">Clear</ion-button>
+</ion-app>
