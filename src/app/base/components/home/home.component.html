@@ -5,14 +5,21 @@
     </ion-toolbar>
   </ion-header>
 
-  <ng-container *ngFor="let note of notes">
-    <app-note-widget [routerLink]="['/notes', note.id]"></app-note-widget>
-  </ng-container>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="createNewNote()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <div class="masonry-wrapper">
+    <div class="box" *ngFor="let note of notes">
+      <app-note-widget
+        [note]="note"
+        [routerLink]="['/notes', note.id]"
+      ></app-note-widget>
+    </div>
+  </div>
 
   <ion-button (click)="clearDB()">Clear</ion-button>
+  <div class="fab">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="createNewNote()">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
 </ion-app>

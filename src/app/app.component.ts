@@ -12,6 +12,5 @@ export class AppComponent {
     if (Capacitor.getPlatform() !== 'web') {
       window.screen.orientation.lock('portrait');
     }
-    this.router.navigate(['/notes']);
   }
 }

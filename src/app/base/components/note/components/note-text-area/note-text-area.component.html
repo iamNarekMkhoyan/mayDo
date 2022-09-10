@@ -1,0 +1,10 @@
+<ion-item>
+  <ion-textarea
+    [value]="textArea.value"
+    [autoGrow]="true"
+    [inputmode]="'text'"
+    [placeholder]="'Text'"
+    [autocapitalize]="'sentences'"
+    (ionChange)="changeValue($event)"
+  ></ion-textarea>
+</ion-item>

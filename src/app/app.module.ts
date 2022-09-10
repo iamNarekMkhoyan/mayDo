@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormsModule } from '@angular/forms';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import { NoteModule } from './base/components/note/note.module';
 
 const routes: Routes = [
   {
-    path: 'notes',
+    path: '',
     component: HomeComponent,
   },
   {
@@ -41,6 +42,7 @@ const dbConfig: DBConfig = {
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(),
     RouterModule.forRoot(routes),
     TranslateModule.forRoot({
@@ -49,7 +51,7 @@ const dbConfig: DBConfig = {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      defaultLanguage: 'ru',
+      defaultLanguage: 'en',
     }),
     NgxIndexedDBModule.forRoot(dbConfig),
     HomeModule,

@@ -1,0 +1,19 @@
+@import "./../../../../assets/Themes/globally-shared.scss";
+@import "./../../../../styles.scss";
+
+.input_title {
+  width: 100%;
+  display: flex;
+  input {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 15px 15px 0px;
+    color: var(--ion-color-primary);
+    outline: none;
+    border: none;
+  }
+}
+.sections-wrapper {
+  padding: 15px;
+}

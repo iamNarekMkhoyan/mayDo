@@ -1,1 +1,21 @@
-<p>note-widget works!</p>
+<ion-card [button]="true">
+  <ion-card-header>
+    <ion-card-title>{{ note.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ng-container *ngFor="let section of note.sections">
+      <div [ngSwitch]="section.type">
+        <app-note-text-area
+          *ngSwitchCase="'text'"
+          [textArea]="section.textArea"
+        ></app-note-text-area>
+        <app-note-checklist
+          *ngSwitchCase="'checklist'"
+          [showButtons]="false"
+          [checkListItems]="section.checkList"
+        ></app-note-checklist>
+      </div>
+    </ng-container>
+  </ion-card-content>
+</ion-card>
