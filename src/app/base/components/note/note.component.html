@@ -1,0 +1,76 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button
+          (click)="navigateBack()"
+          fill="clear"
+          shape="round"
+          size="small"
+        >
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button
+          (click)="deleteNote(note.id)"
+          fill="clear"
+          shape="round"
+          size="small"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="input_title" *ngIf="note">
+    <input
+      [(ngModel)]="note.title"
+      placeholder="{{ 'Title' | translate }}"
+      maxlength="50"
+    />
+  </div>
+
+  <ion-item-divider></ion-item-divider>
+
+  <div class="sections-wrapper">
+    <ng-container *ngIf="note?.sections?.length; else emptyNote">
+      <ng-container *ngFor="let section of note.sections">
+        <div [ngSwitch]="section.type">
+          <app-note-text-area
+            *ngSwitchCase="'text'"
+            [textArea]="section.textArea"
+            (valueChanges)="updateTextAreaSection($event, section.id)"
+          ></app-note-text-area>
+          <app-note-checklist
+            *ngSwitchCase="'checklist'"
+            [showButtons]="true"
+            [checkListItems]="section.checkList"
+            (valueChanges)="updateChecklistSection($event, section.id)"
+          ></app-note-checklist>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #emptyNote></ng-template>
+  </div>
+
+  <div class="fab">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button>
+          <ion-icon
+            name="checkbox-outline"
+            (click)="addSection('checklist')"
+          ></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="text-outline" (click)="addSection('text')"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
+</ion-app>

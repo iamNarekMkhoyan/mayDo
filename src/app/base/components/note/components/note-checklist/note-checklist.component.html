@@ -1,0 +1,23 @@
+<ng-container *ngFor="let item of checkListItems">
+  <ion-item>
+    <ion-checkbox
+      [checked]="item.checked"
+      slot="start"
+      (ionChange)="updateItemChecked($event, item.id)"
+    ></ion-checkbox>
+    <ion-input
+      [inputmode]="'text'"
+      [maxlength]="50"
+      [value]="item.value"
+      (ionChange)="updateItemValue($event, item.id)"
+    ></ion-input>
+    <ion-icon
+      *ngIf="showButtons"
+      (click)="deleteListItem(item.id)"
+      name="close-outline"
+    ></ion-icon>
+  </ion-item>
+</ng-container>
+<ion-button *ngIf="showButtons" class="addBtn" (click)="addListItem()"
+  ><ion-icon name="add-outline"></ion-icon>Add a line</ion-button
+>

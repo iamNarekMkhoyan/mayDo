@@ -1,0 +1,10 @@
+@import "./../../../../assets/Themes/globally-shared.scss";
+
+.masonry-wrapper {
+  columns: 1;
+  padding-top: 15px;
+  .box {
+    break-inside: avoid;
+    margin-bottom: 15px;
+  }
+}
