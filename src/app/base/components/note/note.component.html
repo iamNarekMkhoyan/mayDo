@@ -24,40 +24,49 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="input_title" *ngIf="note">
-    <input
-      [(ngModel)]="note.title"
-      placeholder="{{ 'Title' | translate }}"
-      maxlength="50"
-    />
-  </div>
+  <ion-content>
+    <div class="title_input" *ngIf="note">
+      <ion-item class="title_input-item">
+        <ion-label position="floating">{{ "Title" | translate }}</ion-label>
+        <ion-input
+          class="ion-input"
+          [(ngModel)]="note.title"
+          color="primary"
+          maxlength="50"
+        ></ion-input>
+      </ion-item>
+    </div>
 
-  <ion-item-divider></ion-item-divider>
-
-  <div class="sections-wrapper">
-    <ng-container *ngIf="note?.sections?.length; else emptyNote">
-      <ng-container *ngFor="let section of note.sections">
-        <div [ngSwitch]="section.type">
-          <app-note-text-area
-            *ngSwitchCase="'text'"
-            [textArea]="section.textArea"
-            (valueChanges)="updateTextAreaSection($event, section.id)"
-          ></app-note-text-area>
-          <app-note-checklist
-            *ngSwitchCase="'checklist'"
-            [showButtons]="true"
-            [checkListItems]="section.checkList"
-            (valueChanges)="updateChecklistSection($event, section.id)"
-          ></app-note-checklist>
-        </div>
+    <div class="bottom-margin">
+      <ng-container *ngIf="note?.sections?.length; else emptyNote">
+        <ng-container *ngFor="let section of note.sections">
+          <div [ngSwitch]="section.type">
+            <app-note-text-area
+              *ngSwitchCase="'text'"
+              [textArea]="section.textArea"
+              (valueChanges)="updateTextAreaSection($event, section.id)"
+            ></app-note-text-area>
+            <app-note-checklist
+              *ngSwitchCase="'checklist'"
+              [showButtons]="true"
+              [checkListItems]="section.checkList"
+              (valueChanges)="updateChecklistSection($event, section.id)"
+            ></app-note-checklist>
+          </div>
+        </ng-container>
       </ng-container>
-    </ng-container>
-    <ng-template #emptyNote></ng-template>
-  </div>
+      <ng-template #emptyNote></ng-template>
+    </div>
+  </ion-content>
 
   <div class="fab">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button>
+    <ion-fab
+      vertical="bottom"
+      [activated]="false"
+      horizontal="end"
+      slot="fixed"
+    >
+      <ion-fab-button color="primary">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top">

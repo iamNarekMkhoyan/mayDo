@@ -1,19 +1,22 @@
 @import "./../../../../assets/Themes/globally-shared.scss";
 @import "./../../../../styles.scss";
 
-.input_title {
+.title_input {
   width: 100%;
   display: flex;
-  input {
+  &-item {
+    width: 90%;
+    margin: auto;
+  }
+  .ion-input {
     width: 100%;
     font-size: 20px;
     font-weight: 500;
     padding: 15px 15px 0px;
-    color: var(--ion-color-primary);
     outline: none;
     border: none;
   }
-}
-.sections-wrapper {
-  padding: 15px;
+  .ion-valid {
+    --highlight-background: var(--ion-color-primary);
+  }
 }

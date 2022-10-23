@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
-import { Subject, takeUntil } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 
 import { INote } from 'src/app/shared/models/note.model';
 
@@ -31,9 +31,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe((res) => this.alertOnEmpty(res));
     this.dbService
-      .getAll('notes')
-      .pipe(takeUntil(this.unSubscribe$))
-      .subscribe((res) => (this.notes = res as INote[]));
+      .getAll<INote>('notes')
+      .pipe(
+        takeUntil(this.unSubscribe$),
+        map((notes) =>
+          notes.sort(
+            (a, b) => b.dateTimeEdited.getTime() - a.dateTimeEdited.getTime()
+          )
+        )
+      )
+      .subscribe((res) => {
+        this.notes = res;
+      });
   }
 
   ngOnDestroy(): void {
@@ -46,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .add('notes', {
         title: '',
         sections: [],
+        dateTimeEdited: new Date(),
       })
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe((res) => {

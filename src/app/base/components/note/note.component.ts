@@ -56,6 +56,7 @@ export class NoteComponent implements OnInit, OnDestroy {
       this.toastAlert.emptyDeleted.next(true);
     } else {
       this.router.navigate(['../']);
+      this.note.dateTimeEdited = new Date();
       this.dbService
         .update('notes', this.note)
         .pipe(takeUntil(this.sub$))
