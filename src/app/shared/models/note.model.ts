@@ -2,6 +2,7 @@ export interface INote {
   id: number;
   title?: string;
   sections: INoteSection[];
+  dateTimeEdited: Date;
 }
 
 export interface INoteSection {

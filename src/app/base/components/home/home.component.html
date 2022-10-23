@@ -5,16 +5,18 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="masonry-wrapper">
-    <div class="box" *ngFor="let note of notes">
-      <app-note-widget
-        [note]="note"
-        [routerLink]="['/notes', note.id]"
-      ></app-note-widget>
+  <ion-content>
+    <div class="masonry-wrapper bottom-margin">
+      <div class="box" *ngFor="let note of notes">
+        <app-note-widget
+          [note]="note"
+          [routerLink]="['/notes', note.id]"
+        ></app-note-widget>
+      </div>
     </div>
-  </div>
+    <ion-button (click)="clearDB()">Clear</ion-button>
+  </ion-content>
 
-  <ion-button (click)="clearDB()">Clear</ion-button>
   <div class="fab">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button (click)="createNewNote()">
