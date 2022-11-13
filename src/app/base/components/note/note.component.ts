@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 
@@ -14,6 +15,7 @@ import {
   INote,
   ITextAreaSection,
 } from 'src/app/shared/models/note.model';
+import { sectionType, SectionTypes } from './note.model';
 import { ToastAlertService } from 'src/app/shared/services/toast-alert.service';
 
 @Component({
@@ -23,6 +25,7 @@ import { ToastAlertService } from 'src/app/shared/services/toast-alert.service';
 })
 export class NoteComponent implements OnInit, OnDestroy {
   public note!: INote;
+  public SECTION_TYPES = SectionTypes;
   private sub$: Subject<Object> = new Subject();
 
   @Output() emptyDeleted: EventEmitter<void> = new EventEmitter<void>();
@@ -71,8 +74,8 @@ export class NoteComponent implements OnInit, OnDestroy {
       .subscribe(() => this.router.navigate(['../']));
   }
 
-  public addSection(type: string): void {
-    if (type === 'text') {
+  public addSection(type: sectionType): void {
+    if (type === 'TEXT') {
       this.note.sections.push({
         id: this.note.sections.length,
         type,
@@ -85,7 +88,7 @@ export class NoteComponent implements OnInit, OnDestroy {
         ],
         textArea: { value: '' },
       });
-    } else if (type === 'checklist') {
+    } else if (type === 'CHECKLIST') {
       this.note.sections.push({
         id: this.note.sections.length,
         type,

@@ -1,3 +1,5 @@
+import { sectionType } from "src/app/base/components/note/note.model";
+
 export interface INote {
   id: number;
   title?: string;
@@ -7,7 +9,7 @@ export interface INote {
 
 export interface INoteSection {
   id: number;
-  type: 'text' | 'checklist';
+  type: sectionType;
   textArea: ITextAreaSection;
   checkList: ICheckListSection[];
 }

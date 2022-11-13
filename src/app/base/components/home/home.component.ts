@@ -63,13 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  public clearDB() {
-    this.dbService
-      .clear('notes')
-      .pipe(takeUntil(this.unSubscribe$))
-      .subscribe((isClear) => (this.notes = isClear ? [] : this.notes));
-  }
-
   private async alertOnEmpty(alert: boolean): Promise<any> {
     if (alert) {
       const toast = await this.toastController.create({
