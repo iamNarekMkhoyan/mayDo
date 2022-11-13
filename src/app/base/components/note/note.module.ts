@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
 
-import { NoteComponent } from './note.component';
-import { NoteTextAreaComponent } from './components/note-text-area/note-text-area.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
+
 import { NoteChecklistComponent } from './components/note-checklist/note-checklist.component';
+import { NoteTextAreaComponent } from './components/note-text-area/note-text-area.component';
+import { NoteControlsModule } from './../note-controls/note-controls.module';
+import { NoteComponent } from './note.component';
 
 @NgModule({
   declarations: [NoteComponent, NoteTextAreaComponent, NoteChecklistComponent],
-  imports: [CommonModule, IonicModule, FormsModule, TranslateModule],
+  imports: [CommonModule, IonicModule, FormsModule, TranslateModule, NoteControlsModule],
   exports: [NoteComponent, NoteTextAreaComponent, NoteChecklistComponent],
 })
 export class NoteModule {}

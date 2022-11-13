@@ -11,16 +11,6 @@
           <ion-icon name="arrow-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button
-          (click)="deleteNote(note.id)"
-          fill="clear"
-          shape="round"
-          size="small"
-        >
-          <ion-icon name="trash-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -42,12 +32,12 @@
         <ng-container *ngFor="let section of note.sections">
           <div [ngSwitch]="section.type">
             <app-note-text-area
-              *ngSwitchCase="'text'"
+              *ngSwitchCase="SECTION_TYPES.TEXT"
               [textArea]="section.textArea"
               (valueChanges)="updateTextAreaSection($event, section.id)"
             ></app-note-text-area>
             <app-note-checklist
-              *ngSwitchCase="'checklist'"
+              *ngSwitchCase="SECTION_TYPES.CHECKLIST"
               [showButtons]="true"
               [checkListItems]="section.checkList"
               (valueChanges)="updateChecklistSection($event, section.id)"
@@ -59,27 +49,8 @@
     </div>
   </ion-content>
 
-  <div class="fab">
-    <ion-fab
-      vertical="bottom"
-      [activated]="false"
-      horizontal="end"
-      slot="fixed"
-    >
-      <ion-fab-button color="primary">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top">
-        <ion-fab-button>
-          <ion-icon
-            name="checkbox-outline"
-            (click)="addSection('checklist')"
-          ></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="text-outline" (click)="addSection('text')"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
-  </div>
+  <app-note-controls
+    (addSection)="addSection($event)"
+    (deleteNote)="deleteNote(note.id)"
+  ></app-note-controls>
 </ion-app>
