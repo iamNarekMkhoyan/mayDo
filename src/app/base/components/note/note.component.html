@@ -27,10 +27,15 @@
       </ion-item>
     </div>
 
-    <div class="bottom-margin">
+    <div class="bottom-margin sections">
       <ng-container *ngIf="note?.sections?.length; else emptyNote">
         <ng-container *ngFor="let section of note.sections">
-          <div [ngSwitch]="section.type">
+          <div
+            [appSelectForDeletion]="sectionDeletionActive"
+            (selectSection)="selectSection(section.id)"
+            [ngSwitch]="section.type"
+            class="section"
+          >
             <app-note-text-area
               *ngSwitchCase="SECTION_TYPES.TEXT"
               [textArea]="section.textArea"
@@ -47,10 +52,30 @@
       </ng-container>
       <ng-template #emptyNote></ng-template>
     </div>
+
+    <ng-container *ngIf="sectionDeletionActive">
+      <div class="delete-action">
+        <ion-button
+          [disabled]="!deletionDisable"
+          [expand]="'block'"
+          [fill]="'outline'"
+          [color]="'danger'"
+          class="delete-btn"
+          (click)="deleteSections()"
+        >
+          Delete
+        </ion-button>
+        <ion-button (click)="toggleSectionDeletion()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ng-container>
   </ion-content>
 
   <app-note-controls
+    *ngIf="!sectionDeletionActive"
     (addSection)="addSection($event)"
     (deleteNote)="deleteNote(note.id)"
+    (toggleSectionDeletion)="toggleSectionDeletion()"
   ></app-note-controls>
 </ion-app>

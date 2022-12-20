@@ -16,6 +16,7 @@ export class NoteControlsComponent implements OnInit {
   @Output() addSection: EventEmitter<sectionType> =
     new EventEmitter<sectionType>();
   @Output() deleteNote: EventEmitter<void> = new EventEmitter<void>();
+  @Output() toggleSectionDeletion: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {}
 
@@ -32,5 +33,13 @@ export class NoteControlsComponent implements OnInit {
 
   public deleteWholeNote(): void {
     this.deleteNote.emit();
+  }
+
+  public toggleSectionDelete(): void {
+    this.toggleSectionDeletion.emit();
+  }
+
+  public selectSection(id: number): void {
+    
   }
 }

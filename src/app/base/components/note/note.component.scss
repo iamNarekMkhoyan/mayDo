@@ -20,3 +20,24 @@
     --highlight-background: var(--ion-color-primary);
   }
 }
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .section {
+    padding: 5px;
+  }
+}
+
+.delete-action {
+  position: fixed;
+  bottom: 15px;
+  display: flex;
+  padding: 0 15px;
+  width: 100%;
+  gap: 8px;
+  .delete-btn {
+    flex-basis: 100%;
+  }
+}

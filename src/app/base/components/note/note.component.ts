@@ -26,9 +26,15 @@ import { ToastAlertService } from 'src/app/shared/services/toast-alert.service';
 export class NoteComponent implements OnInit, OnDestroy {
   public note!: INote;
   public SECTION_TYPES = SectionTypes;
+  public sectionDeletionActive: boolean = false;
+  public deletionReadySections: number[] = [];
   private sub$: Subject<Object> = new Subject();
 
   @Output() emptyDeleted: EventEmitter<void> = new EventEmitter<void>();
+
+  get deletionDisable(): boolean {
+    return this.deletionReadySections.length > 0;
+  }
 
   constructor(
     private router: Router,
@@ -122,6 +128,31 @@ export class NoteComponent implements OnInit, OnDestroy {
       (section) => section.id === sectionId
     );
     this.note.sections[sectionIndx].checkList = content;
+  }
+
+  public toggleSectionDeletion(): void {
+    this.sectionDeletionActive = !this.sectionDeletionActive;
+    this.deletionReadySections = [];
+  }
+
+  public selectSection(sectionId: number): void {
+    if (this.deletionReadySections.includes(sectionId)) {
+      const index = this.deletionReadySections.indexOf(sectionId);
+      this.deletionReadySections.splice(index, 1);
+    } else {
+      this.deletionReadySections.push(sectionId);
+    }
+  }
+
+  public deleteSections(): void {
+    const remainingSections = this.note.sections.filter(
+      (section) => !this.deletionReadySections.includes(section.id)
+    );
+    this.note.sections = remainingSections;
+    this.dbService
+      .update('notes', this.note)
+      .pipe(takeUntil(this.sub$))
+      .subscribe(() => this.toggleSectionDeletion());
   }
 
   private get isNoteEmpty(): boolean {

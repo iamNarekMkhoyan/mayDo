@@ -19,6 +19,8 @@ Basic To-Do list app for android, with ionic and capacitor
 
 # Bugs
 1. scroll on note widget
+2. textarea row-count/scroll
+3. ion-icon src with image-consts ?
 
 # For later
 4. undo deletes
