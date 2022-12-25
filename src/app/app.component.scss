@@ -1,8 +1,7 @@
 ::ng-deep {
   .deletion-ready {
     border-radius: 5px;
-    border: 3px solid var(--ion-color-danger);
-    box-shadow: 0px 5px 10px 0px rgb(255, 0, 0, 0.7); 
+    border: 3px solid var(--ion-color-highlight);
   }
   .selection-ready {
     position: relative;
@@ -18,3 +17,4 @@
     }
   }
 }
+

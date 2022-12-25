@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:android": "ionic capacitor build android --project mayDo --android-project android -y",
+    "run:android:livereload": "ionic capacitor run android --project mayDo --livereload --external —-ssl true"
   },
   "private": true,
   "dependencies": {
@@ -18,9 +20,12 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
-    "@capacitor/android": "^3.6.0",
-    "@capacitor/cli": "^3.6.0",
-    "@capacitor/core": "^3.6.0",
+    "@capacitor/android": "^4.6.1",
+    "@capacitor/app": "4.1.1",
+    "@capacitor/core": "4.6.1",
+    "@capacitor/haptics": "4.1.0",
+    "@capacitor/keyboard": "4.1.0",
+    "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^6.1.15",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
@@ -33,6 +38,8 @@
     "@angular-devkit/build-angular": "~13.1.2",
     "@angular/cli": "~13.1.2",
     "@angular/compiler-cli": "~13.1.0",
+    "@capacitor/cli": "4.6.1",
+    "@ionic/angular-toolkit": "latest",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",
@@ -41,7 +48,6 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.5.2",
-    "@ionic/angular-toolkit": "latest"
+    "typescript": "~4.5.2"
   }
 }

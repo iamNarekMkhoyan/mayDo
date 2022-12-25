@@ -1,7 +1,7 @@
 .fab {
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 20px;
+  right: 20px;
   z-index: 9999;
 }
 .ion-page {
@@ -10,4 +10,62 @@
 .bottom-margin {
   padding: 15px;
   margin-bottom: 150px;
+}
+
+/*
+  img styles
+*/
+
+.img-invert {
+  filter: invert(1);
+}
+
+/*
+  ionic component styles
+*/
+
+.ion-content::part(background) {
+  background: var(--ion-color-bg-main);
+}
+
+.ion-toolbar {
+  --background: var(--ion-color-bg-secondary);
+  --border-style: none none solid;
+  --border-width: 2px;
+  --border-color: var(--ion-color-main);
+  --color: var(--ion-color-text-primary);
+}
+
+.ion-toolbar-absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ion-item {
+  --highlight-height: 2px;
+  --highlight-color-focused: var(--ion-color-highlight);
+  --highlight-color-valid: var(--ion-color-highlight);
+  --highlight-color-invalid: var(--ion-color-danger);
+}
+
+.ion-item::part(native) {
+  background: var(--ion-color-bg-main);
+  color: var(--ion-color-text-primary);
+}
+
+.ion-valid {
+  --highlight-background: var(--ion-color-highlight);
+}
+
+.ion-checkbox {
+  --background-checked: var(--ion-color-bg-main);
+  --background: var(--ion-color-bg-main);
+  --border-color-checked: var(--ion-color-bg-main);
+  --border-color: var(--ion-color-highlight);
+  --checkmark-color: var(--ion-color-highlight);
+}
+
+.ion-textarea {
+  font-size: 20px;
 }

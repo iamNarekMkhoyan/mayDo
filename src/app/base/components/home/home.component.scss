@@ -1,4 +1,8 @@
-@import "./../../../../assets/Themes/globally-shared.scss";
+@import "/src/assets/Themes/globally-shared.scss";
+
+.app-title {
+  font-size: 24px;
+}
 
 .masonry-wrapper {
   columns: 1;
@@ -7,4 +11,23 @@
     break-inside: avoid;
     margin-bottom: 15px;
   }
+}
+
+.empty {
+  width: 100%;
+  height: calc(100% - 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 70%;
+  }
+}
+
+.fab::part(native) {
+  background-color: var(--ion-color-main);
+}
+
+.fab-icon {
+  width: 75%;
 }

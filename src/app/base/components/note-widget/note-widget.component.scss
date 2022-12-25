@@ -1,0 +1,10 @@
+.widget {
+  &_card {
+    background-color: var(--ion-color-bg-main);
+    border: 1px solid var(--ion-color-main);
+  }
+  &_title {
+    color: var(--ion-color-main);
+    font-size: 30px;
+  }
+}

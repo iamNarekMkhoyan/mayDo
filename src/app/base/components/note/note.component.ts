@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { Platform } from '@ionic/angular';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 
@@ -17,6 +18,7 @@ import {
 } from 'src/app/shared/models/note.model';
 import { sectionType, SectionTypes } from './note.model';
 import { ToastAlertService } from 'src/app/shared/services/toast-alert.service';
+import { EMPTY_SECTIONS } from 'src/app/shared/constants/images.const';
 
 @Component({
   selector: 'app-note',
@@ -24,6 +26,7 @@ import { ToastAlertService } from 'src/app/shared/services/toast-alert.service';
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit, OnDestroy {
+  EMPTY_SECTIONS = EMPTY_SECTIONS;
   public note!: INote;
   public SECTION_TYPES = SectionTypes;
   public sectionDeletionActive: boolean = false;
@@ -38,10 +41,15 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private platform: Platform,
     private activeRoute: ActivatedRoute,
     private toastAlert: ToastAlertService,
     private dbService: NgxIndexedDBService
-  ) {}
+  ) {
+    this.platform.backButton.subscribeWithPriority(5, () => {
+      this.navigateBack();
+    });
+  }
 
   ngOnInit(): void {
     this.activeRoute.params
@@ -66,10 +74,7 @@ export class NoteComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['../']);
       this.note.dateTimeEdited = new Date();
-      this.dbService
-        .update('notes', this.note)
-        .pipe(takeUntil(this.sub$))
-        .subscribe();
+      this.updateNote();
     }
   }
 
@@ -160,5 +165,12 @@ export class NoteComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
+  }
+
+  private updateNote(): void {
+    this.dbService
+      .update('notes', this.note)
+      .pipe(takeUntil(this.sub$))
+      .subscribe();
   }
 }

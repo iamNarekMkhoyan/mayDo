@@ -1,0 +1,7 @@
+{
+  "name": "mayDo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

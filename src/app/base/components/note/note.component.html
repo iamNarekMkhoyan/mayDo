@@ -1,6 +1,6 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="ion-toolbar ion-toolbar-absolute">
       <ion-buttons slot="start">
         <ion-button
           (click)="navigateBack()"
@@ -14,21 +14,23 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="ion-content">
     <div class="title_input" *ngIf="note">
-      <ion-item class="title_input-item">
-        <ion-label position="floating">{{ "Title" | translate }}</ion-label>
+      <ion-item class="title_input-item ion-item">
         <ion-input
           class="ion-input"
           [(ngModel)]="note.title"
-          color="primary"
+          [placeholder]="'Title' | translate"
           maxlength="50"
         ></ion-input>
       </ion-item>
     </div>
 
-    <div class="bottom-margin sections">
-      <ng-container *ngIf="note?.sections?.length; else emptyNote">
+    <div
+      class="bottom-margin sections"
+      *ngIf="note?.sections?.length; else emptyNote"
+    >
+      <ng-container>
         <ng-container *ngFor="let section of note.sections">
           <div
             [appSelectForDeletion]="sectionDeletionActive"
@@ -50,7 +52,6 @@
           </div>
         </ng-container>
       </ng-container>
-      <ng-template #emptyNote></ng-template>
     </div>
 
     <ng-container *ngIf="sectionDeletionActive">
@@ -65,17 +66,25 @@
         >
           Delete
         </ion-button>
-        <ion-button (click)="toggleSectionDeletion()">
+        <ion-button (click)="toggleSectionDeletion()" color="main">
           <ion-icon name="close-outline"></ion-icon>
         </ion-button>
       </div>
     </ng-container>
   </ion-content>
 
-  <app-note-controls
-    *ngIf="!sectionDeletionActive"
-    (addSection)="addSection($event)"
-    (deleteNote)="deleteNote(note.id)"
-    (toggleSectionDeletion)="toggleSectionDeletion()"
-  ></app-note-controls>
+  <div class="control-fab">
+    <app-note-controls
+      *ngIf="!sectionDeletionActive"
+      (addSection)="addSection($event)"
+      (deleteNote)="deleteNote(note.id)"
+      (toggleSectionDeletion)="toggleSectionDeletion()"
+    ></app-note-controls>
+  </div>
 </ion-app>
+
+<ng-template #emptyNote>
+  <div class="empty">
+    <img [src]="EMPTY_SECTIONS" [alt]="'Note with no sections' | translate" />
+  </div>
+</ng-template>

@@ -13,20 +13,12 @@ Basic To-Do list app for android, with ionic and capacitor
 # ToDo
 1. title/Logo
 2. Add translation
-3. delete sections
-4. refactor logic into services
-5. change the 'add a checkbox' btn 
-
-# Bugs
-1. scroll on note widget
-2. textarea row-count/scroll
-3. ion-icon src with image-consts ?
+3. refactor logic into services
 
 # For later
 4. undo deletes
 6. Drag and drop of notes and sections
-7. Mass delete action for notes and sections
-8. Undo delete functionality
+7. Mass delete action for notes
 6. Hints
 6-1. Hint to add a section
 6-2. Hint to add a new note
