@@ -1,12 +1,15 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
-      <ion-title>{{ "Title" | translate }}</ion-title>
+    <ion-toolbar class="ion-toolbar">
+      <ion-title class="app-title">{{ "mayDo" | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <div class="masonry-wrapper bottom-margin">
+  <ion-content class="ion-content">
+    <div
+      class="masonry-wrapper bottom-margin"
+      *ngIf="notes && notes.length; else emptyListTpl"
+    >
       <div class="box" *ngFor="let note of notes">
         <app-note-widget
           [note]="note"
@@ -16,11 +19,17 @@
     </div>
   </ion-content>
 
-  <div class="fab">
+  <div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="createNewNote()">
-        <ion-icon name="document-text-outline"></ion-icon>
+      <ion-fab-button (click)="createNewNote()" class="fab">
+        <img [src]="PLUS" [alt]="'Add icon' | translate" class="img-invert fab-icon">
       </ion-fab-button>
     </ion-fab>
   </div>
 </ion-app>
+
+<ng-template #emptyListTpl>
+  <div class="empty">
+    <img [src]="EMPTY_NOTES" [alt]="'Empty note list' | translate" />
+  </div>
+</ng-template>

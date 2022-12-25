@@ -2,6 +2,7 @@
   <div *ngSwitchCase="ACTION_TYPES.DELETE">
     <ion-fab vertical="bottom" [activated]="true" horizontal="end" slot="fixed">
       <ion-fab-button
+        class="fab-control"
         color="danger"
         (click)="switchActionType(ACTION_TYPES.DEFAULT)"
       >
@@ -9,10 +10,10 @@
       </ion-fab-button>
       <ion-fab-list side="top">
         <ion-fab-button (click)="deleteWholeNote()">
-          <ion-icon src="assets/icons/delete-note.svg"></ion-icon>
+          <ion-icon [src]="DELETE_NOTE"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon src="assets/icons/delete-section.svg"></ion-icon>
+        <ion-fab-button (click)="toggleSectionDelete()">
+          <ion-icon [src]="DELETE_SECTION"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
@@ -21,6 +22,7 @@
   <div *ngSwitchCase="ACTION_TYPES.ADD">
     <ion-fab vertical="bottom" [activated]="true" horizontal="end" slot="fixed">
       <ion-fab-button
+        class="fab-control"
         color="success"
         (click)="switchActionType(ACTION_TYPES.DEFAULT)"
       >
@@ -28,10 +30,10 @@
       </ion-fab-button>
       <ion-fab-list side="top">
         <ion-fab-button (click)="createSection(SECTION_TYPES.TEXT)">
-          <ion-icon src="assets/icons/text-area.svg"></ion-icon>
+          <ion-icon [src]="TEXT"></ion-icon>
         </ion-fab-button>
         <ion-fab-button (click)="createSection(SECTION_TYPES.CHECKLIST)">
-          <ion-icon src="assets/icons/check-box.svg"></ion-icon>
+          <ion-icon [src]="CHECKBOX"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
@@ -44,8 +46,8 @@
       horizontal="end"
       slot="fixed"
     >
-      <ion-fab-button color="primary">
-        <ion-icon src="assets/icons/edit.svg"></ion-icon>
+      <ion-fab-button color="main" class="fab-control">
+        <ion-icon [src]="EDIT"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top">
         <ion-fab-button>
@@ -55,7 +57,7 @@
           ></ion-icon>
         </ion-fab-button>
         <ion-fab-button (click)="switchActionType(ACTION_TYPES.DELETE)">
-          <ion-icon name="trash-outline"></ion-icon>
+          <ion-icon [src]="DELETE"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>

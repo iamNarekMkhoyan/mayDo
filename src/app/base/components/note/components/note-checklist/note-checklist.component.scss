@@ -1,6 +1,19 @@
-@import "./../../../../../../assets/Themes/variables.scss";
+@import "/src//assets//Themes/globally-shared.scss";
 
-.addBtn {
-  --background: var(--ion-color-warning);
-  margin-top: 15px;
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  color: var(--ion-color-highlight);
+}
+
+.close-icon {
+  margin-top: 18px;
+  margin-left: 18px;
+  color: var(--ion-color-highlight);
+}
+
+.item-flex-center::part(native) {
+  align-items: flex-start;
 }

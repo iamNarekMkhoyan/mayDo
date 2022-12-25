@@ -1,22 +1,58 @@
-@import "./../../../../assets/Themes/globally-shared.scss";
-@import "./../../../../styles.scss";
+@import "/src//assets/Themes/globally-shared.scss";
 
 .title_input {
   width: 100%;
   display: flex;
+  margin-top: 75px;
   &-item {
     width: 90%;
     margin: auto;
   }
   .ion-input {
     width: 100%;
-    font-size: 20px;
+    font-size: 40px;
     font-weight: 500;
     padding: 15px 15px 0px;
     outline: none;
     border: none;
+    color: var(--ion-color-text-primary)
   }
-  .ion-valid {
-    --highlight-background: var(--ion-color-primary);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .section {
+    padding: 5px;
+  }
+}
+
+.delete-action {
+  position: fixed;
+  bottom: 15px;
+  display: flex;
+  padding: 0 15px;
+  width: 100%;
+  gap: 8px;
+  .delete-btn {
+    flex-basis: 100%;
+  }
+}
+
+.control-fab {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.empty {
+  width: 100%;
+  height: calc(100% - 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 70%;
   }
 }
