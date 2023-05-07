@@ -1,25 +1,34 @@
-<ng-container *ngFor="let item of checkListItems">
-  <ion-item class="ion-item item-flex-center">
-    <ion-checkbox
-      class="ion-checkbox"
-      [checked]="item.checked"
-      slot="start"
-      (ionChange)="updateItemChecked($event, item.id)"
-    ></ion-checkbox>
-    <ion-textarea
-      class="ion-textarea"
-      [value]="item.value"
-      [autoGrow]="true"
-      (ionChange)="updateItemValue($event, item.id)"
-    ></ion-textarea>
-    <ion-icon
-      *ngIf="showButtons"
-      (click)="deleteListItem(item.id)"
-      class="close-icon"
-      name="close-outline"
-    ></ion-icon>
-  </ion-item>
-</ng-container>
+<div class="checklist-wrapper">
+  <ng-container *ngFor="let item of checkListItems; let index = index">
+    <div class="checklist-row">
+      <ion-checkbox
+        class="ion-checkbox"
+        [checked]="item.checked"
+        slot="start"
+        (ionChange)="updateItemChecked($event, item.id)"
+      ></ion-checkbox>
+      <div class="inner-wrapper">
+        <ion-textarea
+          class="ion-textarea"
+          [appAutofocus]="activeItemId"
+          [value]="item.value"
+          [autoGrow]="true"
+          [autocapitalize]="'sentences'"
+          [rows]="1"
+          (ionChange)="updateItemValue($event, item.id)"
+          (ionFocus)="showCloseIcon(index)"
+          (ionBlur)="hideCloseIcon(index)"
+        ></ion-textarea>
+        <ion-icon
+          *ngIf="showButtons"
+          (click)="deleteListItem(item.id)"
+          [class]="'close-icon close-icon__' + index"
+          name="close-outline"
+        ></ion-icon>
+      </div>
+    </div>
+  </ng-container>
+</div>
 <ion-button fill="clear" (click)="addListItem()" *ngIf="showButtons">
   <div class="add-btn">
     <ion-icon name="add-outline"></ion-icon>
