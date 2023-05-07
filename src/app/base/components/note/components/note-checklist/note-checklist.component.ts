@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
+import { take, timer } from 'rxjs';
 import { ICheckListSection } from 'src/app/shared/models/note.model';
 
 @Component({
@@ -6,16 +13,33 @@ import { ICheckListSection } from 'src/app/shared/models/note.model';
   templateUrl: './note-checklist.component.html',
   styleUrls: ['./note-checklist.component.scss'],
 })
-export class NoteChecklistComponent implements OnInit {
+export class NoteChecklistComponent {
+  public activeItemId!: number;
+
   @Input() public checkListItems: ICheckListSection[] = [];
   @Input() public showButtons: boolean = false;
   @Output() valueChanges: EventEmitter<ICheckListSection[]> = new EventEmitter<
     ICheckListSection[]
   >();
 
-  constructor() {}
+  @HostListener('document:keydown.enter', ['$event'])
+  private enterKeyHandler(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.addListItem();
+  }
 
-  ngOnInit(): void {}
+  @HostListener('document:keydown.backspace', ['$event'])
+  private backspaceHandler(event: KeyboardEvent): void {
+    if (!this.activeItemId) {
+      return;
+    }
+    if (this.checkListItems[this.activeItemId].value) {
+      return;
+    }
+    event.preventDefault();
+    this.deleteListItem(this.activeItemId);
+    this.activeItemId--;
+  }
 
   public updateItemValue(value: Event, id: number): void {
     const checkboxValue = (value as CustomEvent).detail;
@@ -44,5 +68,21 @@ export class NoteChecklistComponent implements OnInit {
       checked: false,
       id: this.checkListItems.length,
     });
+    this.activeItemId = this.checkListItems.length;
+  }
+
+  public showCloseIcon(index: number) {
+    this.activeItemId = index;
+    const closeIcon = document.querySelector('.close-icon__' + index);
+    timer(50)
+      .pipe(take(1))
+      .subscribe(() => closeIcon?.classList.add('close-icon__active'));
+  }
+
+  public hideCloseIcon(index: number) {
+    const closeIcon = document.querySelector('.close-icon__' + index);
+    timer(50)
+      .pipe(take(1))
+      .subscribe(() => closeIcon?.classList.remove('close-icon__active'));
   }
 }

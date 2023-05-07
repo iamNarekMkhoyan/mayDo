@@ -7,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './base/components/home/home.component';
@@ -57,7 +58,7 @@ const dbConfig: DBConfig = {
     HomeModule,
     NoteModule,
   ],
-  providers: [],
+  providers: [ScreenOrientation],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

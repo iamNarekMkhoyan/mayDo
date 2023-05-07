@@ -1,6 +1,6 @@
 {
   "name": "may-do",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "@awesome-cordova-plugins/screen-orientation": "^6.3.0",
     "@capacitor/android": "^4.6.1",
     "@capacitor/app": "4.1.1",
     "@capacitor/core": "4.6.1",
@@ -29,6 +30,7 @@
     "@ionic/angular": "^6.1.15",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "cordova-plugin-screen-orientation": "^3.0.3",
     "ngx-indexed-db": "^11.0.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
