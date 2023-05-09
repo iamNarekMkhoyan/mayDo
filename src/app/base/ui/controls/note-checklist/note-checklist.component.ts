@@ -1,34 +1,27 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-} from '@angular/core';
-import { take, timer } from 'rxjs';
-import { ICheckListSection } from 'src/app/shared/models/note.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
+import { CheckListSection, ICheckListSection } from "@shared/interfaces/note.interface";
+import { take, timer } from "rxjs";
 
 @Component({
-  selector: 'app-note-checklist',
-  templateUrl: './note-checklist.component.html',
-  styleUrls: ['./note-checklist.component.scss'],
+  selector: "app-note-checklist",
+  templateUrl: "./note-checklist.component.html",
+  styleUrls: ["./note-checklist.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteChecklistComponent {
   public activeItemId!: number;
 
   @Input() public checkListItems: ICheckListSection[] = [];
   @Input() public showButtons: boolean = false;
-  @Output() valueChanges: EventEmitter<ICheckListSection[]> = new EventEmitter<
-    ICheckListSection[]
-  >();
+  @Output() valueChanges: EventEmitter<ICheckListSection[]> = new EventEmitter<ICheckListSection[]>();
 
-  @HostListener('document:keydown.enter', ['$event'])
+  @HostListener("document:keydown.enter", ["$event"])
   private enterKeyHandler(event: KeyboardEvent): void {
     event.preventDefault();
     this.addListItem();
   }
 
-  @HostListener('document:keydown.backspace', ['$event'])
+  @HostListener("document:keydown.backspace", ["$event"])
   private backspaceHandler(event: KeyboardEvent): void {
     if (!this.activeItemId) {
       return;
@@ -56,33 +49,27 @@ export class NoteChecklistComponent {
   }
 
   public deleteListItem(itemId: number): void {
-    const itemIndx = this.checkListItems.findIndex(
-      (item) => item.id === itemId
-    );
+    const itemIndx = this.checkListItems.findIndex((item) => item.id === itemId);
     this.checkListItems.splice(itemIndx, 1);
   }
 
   public addListItem(): void {
-    this.checkListItems.push({
-      value: '',
-      checked: false,
-      id: this.checkListItems.length,
-    });
+    this.checkListItems.push(new CheckListSection(this.checkListItems.length));
     this.activeItemId = this.checkListItems.length;
   }
 
   public showCloseIcon(index: number) {
     this.activeItemId = index;
-    const closeIcon = document.querySelector('.close-icon__' + index);
+    const closeIcon = document.querySelector(".close-icon__" + index);
     timer(50)
       .pipe(take(1))
-      .subscribe(() => closeIcon?.classList.add('close-icon__active'));
+      .subscribe(() => closeIcon?.classList.add("close-icon__active"));
   }
 
   public hideCloseIcon(index: number) {
-    const closeIcon = document.querySelector('.close-icon__' + index);
+    const closeIcon = document.querySelector(".close-icon__" + index);
     timer(50)
       .pipe(take(1))
-      .subscribe(() => closeIcon?.classList.remove('close-icon__active'));
+      .subscribe(() => closeIcon?.classList.remove("close-icon__active"));
   }
 }
